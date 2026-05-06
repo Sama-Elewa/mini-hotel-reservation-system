@@ -1,112 +1,143 @@
-# Hotel Management System (C++ / Qt)
+# Mini Hotel Reservation System (Qt C++)
 
-## Overview
-This project is a Hotel Management System implemented in C++ with a Qt-based GUI.  
-It manages customers, rooms, reservations, and reviews using structs and arrays, with file handling used only for saving and loading data.
+## Description
+A Mini Hotel Reservation System implemented in C++ using Qt for the GUI.  
+The system manages hotel room reservations and customer reviews using structs and arrays.
 
----
-
-## Program Flow
-
-When the program starts, the user chooses:
-
-1. Customer  
-2. Admin  
-
-### Customer
-- Logs in using username and password  
-- After login, a list of available functions is displayed  
-
-### Admin
-- Logs in using admin credentials  
-- After login, a list of available functions is displayed  
-
----
-
-## Features
-
-### Customer Functions
-- Log in / Log out  
-- View available rooms  
-- Reserve a room  
-- Edit reservation dates  
-- Cancel reservation  
-- Add room review  
-
-### Admin Functions
-- Log in / Log out  
-- Add reservation for a customer  
-- Edit reservation (change start/end dates if applicable)  
-- Cancel reservation  
-- View reviews:
-  - All reviews  
-  - Seen reviews  
-  - Unseen reviews  
-  - Reviews from the last 30 days  
+- Rooms are represented as a 2D array (10 floors × 10 rooms)
+- Customers can reserve, edit, and cancel bookings
+- Admin can manage reservations and reviews
+- Data is saved to files and loaded at startup
 
 ---
 
 ## Data Structures
 
-The system uses structs and arrays for:
+The system uses the following structs:
 
-- Customers  
-- Rooms  
-- Reviews  
-- Admins  
+### Customer
+- CustomerID
+- Name
+- UserName
+- Email
+- Password
+- CreditCardNumber
+- RoomNumber
+- StartDate
+- EndDate
 
-All data is processed in memory during runtime.
+### Room
+- RoomNumber
+- BookingStatus
+- CustomerNumber
+
+### Review
+- ReviewID
+- RoomNumber
+- ReviewContent
+- Seen (extra)
+- ReviewDate (extra)
+
+### Admin
+- AdminID
+- UserName
+- Password
+
+---
+
+## Program Flow
+
+At startup, the user chooses:
+1. Customer
+2. Admin
+
+### Customer
+- Logs in or signs up
+- After login, a menu of operations is available
+
+### Admin
+- Logs in using admin credentials
+- After login, a menu of operations is available
+
+---
+
+## Customer Functions
+
+- Log in
+- Sign up
+- Check room availability (by floor and dates)
+- Reserve room
+- Edit reservation dates
+- Cancel reservation
+- Add review (linked to room)
+- Log out
+
+---
+
+## Admin Functions
+
+- Log in
+- Add reservation (room number, dates, customer ID)
+- Edit reservation (change dates)
+- Cancel reservation
+- View room reviews:
+  - All reviews
+  - Seen reviews
+  - Unseen reviews
+  - Reviews from last 30 days
+- Mark reviews as seen
+- Log out
+
+---
+
+## System Features
+
+- Automatic calculation of:
+  - Available rooms
+  - Reviews within the last 30 days
+- Input validation:
+  - Name, username, email
+  - Password strength
+  - Credit card validation (Luhn algorithm)
+- Basic password encryption
+- Predefined data:
+  - 5 customers
+  - 100 rooms (10 floors × 10 rooms)
+  - 5 reviews
+  - 1 admin
 
 ---
 
 ## File Handling
 
-Files are used only for:
+Files are used only for persistence:
 
-1. Saving data before closing the program  
-2. Loading data at program start  
+- `customers.txt`
+- `rooms.txt`
+- `reviews.txt`
 
-Files used:
-- `customers.txt`  
-- `rooms.txt`  
-- `reviews.txt`  
+Usage:
+1. Load data into arrays at program start
+2. Save data before program exit
 
-No data processing is performed directly on files.
-
----
-
-## Minimum Requirements
-
-- At least 5 predefined Customers  
-- At least 50 Rooms (10 rooms per floor)  [100 rooms numbered from 10 to 109 were actually created]
-- At least 5 predefined Reviews  
-- At least 1 Admin account  
-
----
-
-## Additional Features
-
-- Graphical User Interface using Qt  
-- Automatic calculation of:
-  - Available rooms  
-  - Reviews from the last 30 days  
-- Input validation (email, password, credit card, etc.)  
-- Basic password encryption  
+All processing is done using arrays and structs during runtime.
 
 ---
 
 ## Build Requirements
 
-- C++  
-- Qt 6 (Core, GUI, Widgets)  
-- CMake (version 3.16 or higher)  
+- C++
+- Qt 6 (Core, Gui, Widgets)
+- CMake ≥ 3.16
 
 ---
 
 ## Notes
 
-- All operations (search, edit, display) are performed using arrays and structs.  
-- Files are strictly used for persistence only, as required.  
+- Room numbers range from 10 to 109
+- Booking status is tracked per room
+- Each review can be marked as seen/unseen
+- The system uses a GUI built with Qt Widgets
 
 ---
 
